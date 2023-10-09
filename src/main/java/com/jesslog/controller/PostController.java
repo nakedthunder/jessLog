@@ -22,11 +22,11 @@ public class PostController {
     * - BindingResult / .hasErrors()
     * */
     @PostMapping("/posts")
-    public Map<String, String> post(@RequestBody @Valid PostCreate paramas, BindingResult result) throws Exception {
+    public Map<String, String> post(@RequestBody @Valid PostCreate paramas) throws Exception {
         log.info("postCreate: ", paramas.toString());
 
         // 에러가 있는 경우
-        if (result.hasErrors()) {
+       /* if (result.hasErrors()) {
             List<FieldError> fieldErrors = result.getFieldErrors();
             FieldError firstFieldError = fieldErrors.get(0);
             String fieldName = firstFieldError.getField(); // 에러난 곳
@@ -36,7 +36,7 @@ public class PostController {
             Map<String, String> error = new HashMap<>();
             error.put(fieldName, errorMessage);
             return error;
-        }
+        }*/
 
         return Map.of();
     }
