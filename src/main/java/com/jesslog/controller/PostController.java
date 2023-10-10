@@ -1,6 +1,8 @@
 package com.jesslog.controller;
 
 import com.jesslog.request.PostCreate;
+import com.jesslog.service.PostService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -15,7 +17,11 @@ import java.util.Map;
 
 @Slf4j
 @RestController // Controller 도 할 수 있는데 데이터기반으로 응답을
+@RequiredArgsConstructor
 public class PostController {
+
+    // 0911 확인하기
+    private final PostService postService;
 
     /* [Spring 데이터 검증]
     * - @Valid는 @NotBalnk 를 통해 empty, null 검증
@@ -38,6 +44,7 @@ public class PostController {
         }*/
         // 디비를 직접 여기서 저장하지말고 service레이어에서 repo를 호출하는 방법으로 ..
 
+        postService.write(request);
         return Map.of();
     }
 }

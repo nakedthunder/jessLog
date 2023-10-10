@@ -1,5 +1,6 @@
 package com.jesslog.controller;
 
+import com.jesslog.repository.PostRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ class PostControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired // 필드주입으로 받는다.
+    private PostRepository postRepository;
 
     @Test
     @DisplayName("/post 요청 시 Hello world 출력")
@@ -42,5 +46,20 @@ class PostControllerTest {
                 .andExpect(jsonPath("$.message").value("잘못된 요청입니다."))
                 .andExpect(jsonPath("$.validation.title").value("타이틀을 입력해주세요."))
                 .andDo(print());
+    }
+
+    @Test
+    @DisplayName("/post 요청 시 DB에 값이 저장된다.")
+    void insertToDbByPost() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/posts")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"title\": \"제목 입니다.\", \"content\": \"내용입니다.\"}")
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(print());
+
+        // then, 요청한 json이 DB에 저장되기 때문에 
+
+
     }
 }
