@@ -22,8 +22,7 @@ public class PostController {
     * - BindingResult / .hasErrors()
     * */
     @PostMapping("/posts")
-    public Map<String, String> post(@RequestBody @Valid PostCreate paramas) throws Exception {
-        log.info("postCreate: ", paramas.toString());
+    public Map<String, String> post(@RequestBody @Valid PostCreate request) throws Exception {
 
         // 에러가 있는 경우
        /* if (result.hasErrors()) {
@@ -37,6 +36,7 @@ public class PostController {
             error.put(fieldName, errorMessage);
             return error;
         }*/
+        // 디비를 직접 여기서 저장하지말고 service레이어에서 repo를 호출하는 방법으로 ..
 
         return Map.of();
     }
