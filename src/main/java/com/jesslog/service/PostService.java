@@ -17,11 +17,15 @@ public class PostService {
 
 
     // 글을 저장하는 메서드
-    public void write(PostCreate postCreate) {
+    public Post write(PostCreate postCreate) {
         // postCreate가 request 형태이지, 엔티티가 아니여서 들어가지지않음
         // PostCreate -> Entity
-        Post post = new Post(postCreate.getTitle(), postCreate.getContent());
-        postRepository.save(post);
+        //Post post = new Post(postCreate.getTitle(), postCreate.getContent());
+        Post post = Post.builder()
+                .title(postCreate.getTitle())
+                .content(postCreate.getContent())
+                .build();
+        return postRepository.save(post);
 
     }
 }

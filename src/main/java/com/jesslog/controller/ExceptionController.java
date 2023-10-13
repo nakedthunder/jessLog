@@ -29,7 +29,11 @@ public class ExceptionController {
 //        response.put(field, message);
         //return response;
 
-        ErrorResponse response = new ErrorResponse("400", "잘못된 요청입니다.");
+        //ErrorResponse response = new ErrorResponse("400", "잘못된 요청입니다.")
+        ErrorResponse response = ErrorResponse.builder()
+                .code("400")
+                .message("잘못된 요청입니다.")
+                .build();
 
         // ArrayList 안에 필드객체가 담겨져 있는 것
         for (FieldError fieldError : e.getFieldErrors()) {

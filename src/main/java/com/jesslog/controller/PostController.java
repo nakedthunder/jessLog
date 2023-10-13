@@ -1,5 +1,6 @@
 package com.jesslog.controller;
 
+import com.jesslog.domain.Post;
 import com.jesslog.request.PostCreate;
 import com.jesslog.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class PostController {
     * - BindingResult / .hasErrors()
     * */
     @PostMapping("/posts")
-    public Map<String, String> post(@RequestBody @Valid PostCreate request) throws Exception {
+    public Post post(@RequestBody @Valid PostCreate request) throws Exception {
 
         // 에러가 있는 경우
        /* if (result.hasErrors()) {
@@ -44,7 +45,10 @@ public class PostController {
         }*/
         // 디비를 직접 여기서 저장하지말고 service레이어에서 repo를 호출하는 방법으로 ..
 
-        postService.write(request);
-        return Map.of();
+        return postService.write(request);
+
+        // 현재 빈 객체가 내려가는데, post요청이면 따로 응답을 주지않는다.
+        // 그래서 메서드타입을 void로 변환
+        //return Map.of();
     }
 }
