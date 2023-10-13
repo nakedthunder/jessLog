@@ -17,7 +17,7 @@ public class PostService {
 
 
     // 글을 저장하는 메서드
-    public Post write(PostCreate postCreate) {
+    public void write(PostCreate postCreate) {
         // postCreate가 request 형태이지, 엔티티가 아니여서 들어가지지않음
         // PostCreate -> Entity
         //Post post = new Post(postCreate.getTitle(), postCreate.getContent());
@@ -25,7 +25,7 @@ public class PostService {
                 .title(postCreate.getTitle())
                 .content(postCreate.getContent())
                 .build();
-        return postRepository.save(post);
+        postRepository.save(post);
 
     }
 }
