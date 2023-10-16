@@ -1,12 +1,11 @@
 package com.jesslog.controller;
 
+import com.jesslog.domain.Post;
 import com.jesslog.request.PostCreate;
 import com.jesslog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -45,4 +44,13 @@ public class PostController {
         // 그래서 메서드타입을 void로 변환
         //return Map.of();
     }
+
+    /**
+     * /post/{postId} -> 글 단건 조회
+     */
+     @GetMapping("/post/{postId}")
+    public Post get(@PathVariable(name = "postId") Long id) {
+         Post post = postService.get(id);
+         return post;
+     }
 }
