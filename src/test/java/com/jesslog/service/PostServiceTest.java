@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class PostServiceTest {
 
-    // mockRepo를 넣어줘도 되나, 실제 레파지토리를 주입받아오되는데, 그냥 PostService 자체를 주입받자
     @Autowired
     private PostService postService;
 

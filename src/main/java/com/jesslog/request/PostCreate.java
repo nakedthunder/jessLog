@@ -16,8 +16,7 @@ public class PostCreate {
     @NotBlank(message = "컨텐츠를 입력해주세요.")
     private String content;
 
-    // 생성자 생성 , @AllArgucontr...
-    @Builder // java 디자인패턴, 빌더패턴
+    @Builder
     public PostCreate(String title, String content) {
         this.title = title;
         this.content = content;
