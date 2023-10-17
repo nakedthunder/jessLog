@@ -1,6 +1,7 @@
 package com.jesslog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jesslog.domain.Post;
 import com.jesslog.repository.PostRepository;
 import com.jesslog.request.PostCreate;
 import org.junit.jupiter.api.Assertions;
@@ -115,4 +116,27 @@ class PostControllerTest {
         assertEquals(1L, postRepository.count());
 
     }
+
+    @Test
+    @DisplayName("글 1개 조회")
+    void test4() throws Exception {
+        // given
+        Post post = Post.builder()
+                .title("foo")
+                .content("bar")
+                .build();
+
+        postRepository.save(post);
+
+        //expected
+        mockMvc.perform(MockMvcRequestBuilders.get("/post/{postId}", post.getId())
+                        .contentType(APPLICATION_JSON)
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.id").value(post.getId()))
+                .andExpect(jsonPath("$.title").value("foo"))
+                .andExpect(jsonPath("$.content").value("bar"))
+                .andDo(print());
+    }
+
 }
