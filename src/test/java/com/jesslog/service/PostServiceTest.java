@@ -3,6 +3,7 @@ package com.jesslog.service;
 import com.jesslog.domain.Post;
 import com.jesslog.repository.PostRepository;
 import com.jesslog.request.PostCreate;
+import com.jesslog.response.PostResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -54,13 +55,13 @@ class PostServiceTest {
         postRepository.save(requestPost);
 
         // get으로 다시 조회해오기
-        Post post = postService.get(requestPost.getId());
+        PostResponse response = postService.get(requestPost.getId());
 
         // 테스트 확인
-        Assertions.assertNotNull(post);
+        Assertions.assertNotNull(response);
         // 테스트 검증
-        Assertions.assertEquals("foo", post.getTitle());
-        Assertions.assertEquals("bar", post.getContent());
+        Assertions.assertEquals("foo", response.getTitle());
+        Assertions.assertEquals("bar", response.getContent());
     }
 
 

@@ -1,7 +1,7 @@
 package com.jesslog.controller;
 
-import com.jesslog.domain.Post;
 import com.jesslog.request.PostCreate;
+import com.jesslog.response.PostResponse;
 import com.jesslog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,8 +49,8 @@ public class PostController {
      * /post/{postId} -> 글 단건 조회
      */
      @GetMapping("/post/{postId}")
-    public Post get(@PathVariable(name = "postId") Long id) {
-         Post post = postService.get(id);
-         return post;
+    public PostResponse get(@PathVariable(name = "postId") Long id) {
+         PostResponse response = postService.get(id);
+         return response;
      }
 }
