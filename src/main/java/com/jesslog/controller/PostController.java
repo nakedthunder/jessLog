@@ -1,13 +1,16 @@
 package com.jesslog.controller;
 
+import com.jesslog.domain.Post;
 import com.jesslog.request.PostCreate;
 import com.jesslog.response.PostResponse;
 import com.jesslog.service.PostService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController // Controller 도 할 수 있는데 데이터기반으로 응답을
@@ -49,8 +52,12 @@ public class PostController {
      * /post/{postId} -> 글 단건 조회
      */
      @GetMapping("/post/{postId}")
-    public PostResponse get(@PathVariable(name = "postId") Long id) {
-         PostResponse response = postService.get(id);
-         return response;
+    public PostResponse get(@PathVariable(name = "postId") Long postId) {
+        return postService.get(postId);
+     }
+
+     @GetMapping("/posts")
+    public List<Post> getList() {
+         return postService.getList();
      }
 }
