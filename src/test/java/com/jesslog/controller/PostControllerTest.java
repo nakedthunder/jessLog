@@ -134,4 +134,32 @@ class PostControllerTest {
                 .andDo(print());
     }
 
+    @Test
+    @DisplayName("글 여러개 조회")
+    void test5() throws Exception {
+        // given
+        Post post1 = Post.builder()
+                .title("12345123451234")
+                .content("bar")
+                .build();
+
+        postRepository.save(post1);
+
+        Post post2 = Post.builder()
+                .title("12345123451234")
+                .content("bar")
+                .build();
+
+        postRepository.save(post2);
+
+        //expected
+        // json형태가 Object로 내려옴. 그래서 위처럼  단건 검증을 하면안됨
+        mockMvc.perform(MockMvcRequestBuilders.get("/posts")
+                        .contentType(APPLICATION_JSON)
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(print());
+    }
+
+
 }
