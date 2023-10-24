@@ -83,7 +83,7 @@ class PostServiceTest {
         // 저장시켜주고
         postRepository.save(requestPost2);
 
-        List<Post> posts = postService.getList();
+        List<PostResponse> posts = postService.getList();
 
         assertEquals(2L, posts.size());
     }

@@ -158,6 +158,7 @@ class PostControllerTest {
                         .contentType(APPLICATION_JSON)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$."))
                 .andDo(print());
     }
 
