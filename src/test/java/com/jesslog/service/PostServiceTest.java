@@ -67,7 +67,7 @@ class PostServiceTest {
     }
 
     @Test
-    @DisplayName("단건 조회")
+    @DisplayName("리스트 조회")
     void test3() {
         Post requestPost1 = Post.builder()
                 .title("foo1")

@@ -41,10 +41,12 @@ public class PostService {
     }
 
     public List<PostResponse> getList() {
+        // PostResponse로 만들어줄라면,
         return postRepository.findAll().stream()
-                .map(post -> PostResponse.builder()
+                .map(post -> PostResponse.builder() // 빌더를 만들었어서 엔티티값을 return 해줘도된ㄴ데
                         .id(post.getId())
                         .title(post.getTitle())
+                        .content(post.getContent())
                         .build())
                 .collect(Collectors.toList());
     }

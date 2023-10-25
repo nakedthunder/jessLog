@@ -141,17 +141,17 @@ class PostControllerTest {
     @Test
     @DisplayName("글 여러개 조회")
     void test5() throws Exception {
-        // given
+        // given: 글 2개를 저장하다.
         Post post1 = Post.builder()
-                .title("12345123451234")
-                .content("bar")
+                .title("title_1")
+                .content("content_1")
                 .build();
 
         postRepository.save(post1);
 
         Post post2 = Post.builder()
-                .title("12345123451234")
-                .content("bar")
+                .title("title_2")
+                .content("content_2")
                 .build();
 
         postRepository.save(post2);
@@ -162,7 +162,10 @@ class PostControllerTest {
                         .contentType(APPLICATION_JSON)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(jsonPath("$.length", Matchers.is(2)))
+                .andExpect(jsonPath("$.length()", Matchers.is(2)))
+                .andExpect(jsonPath("$[0].id").value(post1.getId()))
+                .andExpect(jsonPath("$[0].title").value("title_1"))
+                .andExpect(jsonPath("[0].content").value("content_1"))
                 .andDo(print());
     }
 
