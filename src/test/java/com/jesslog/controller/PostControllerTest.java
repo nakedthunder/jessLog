@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jesslog.domain.Post;
 import com.jesslog.repository.PostRepository;
 import com.jesslog.request.PostCreate;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.regex.Matcher;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -158,7 +162,7 @@ class PostControllerTest {
                         .contentType(APPLICATION_JSON)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(jsonPath("$."))
+                .andExpect(jsonPath("$.length", Matchers.is(2)))
                 .andDo(print());
     }
 
