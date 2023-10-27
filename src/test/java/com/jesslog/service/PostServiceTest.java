@@ -69,19 +69,16 @@ class PostServiceTest {
     @Test
     @DisplayName("리스트 조회")
     void test3() {
-        Post requestPost1 = Post.builder()
+        // 저장시켜주고
+        postRepository.saveAll(List.of(Post.builder()
                 .title("foo1")
                 .content("bar1")
-                .build();
-        // 저장시켜주고
-        postRepository.save(requestPost1);
-
-        Post requestPost2 = Post.builder()
+                .build(),
+                 Post.builder()
                 .title("foo2")
                 .content("bar2")
-                .build();
-        // 저장시켜주고
-        postRepository.save(requestPost2);
+                .build()
+                ));
 
         List<PostResponse> posts = postService.getList();
 
