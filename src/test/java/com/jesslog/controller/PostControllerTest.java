@@ -141,20 +141,17 @@ class PostControllerTest {
     @Test
     @DisplayName("글 여러개 조회")
     void test5() throws Exception {
+        // 레파지토리에다가 바로 저장하고 변수로 변경
         // given: 글 2개를 저장하다.
-        Post post1 = Post.builder()
+        Post post1 = postRepository.save(Post.builder()
                 .title("title_1")
                 .content("content_1")
-                .build();
+                .build());
 
-        postRepository.save(post1);
-
-        Post post2 = Post.builder()
+        Post post2 = postRepository.save(Post.builder()
                 .title("title_2")
                 .content("content_2")
-                .build();
-
-        postRepository.save(post2);
+                .build());
 
         //expected
         // json형태가 Object로 내려옴. 그래서 위처럼  단건 검증을 하면안됨
@@ -165,7 +162,10 @@ class PostControllerTest {
                 .andExpect(jsonPath("$.length()", Matchers.is(2)))
                 .andExpect(jsonPath("$[0].id").value(post1.getId()))
                 .andExpect(jsonPath("$[0].title").value("title_1"))
-                .andExpect(jsonPath("[0].content").value("content_1"))
+                .andExpect(jsonPath("$[0].content").value("content_1"))
+                .andExpect(jsonPath("$[1].id").value(post2.getId()))
+                .andExpect(jsonPath("$[1].title").value("title_2"))
+                .andExpect(jsonPath("$[1].content").value("content_2"))
                 .andDo(print());
     }
 
