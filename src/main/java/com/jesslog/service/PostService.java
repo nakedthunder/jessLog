@@ -40,7 +40,7 @@ public class PostService {
                 .build();
     }
 
-    public List<PostResponse> getList() {
+    public List<PostResponse> getList(int page) {
         // PostResponse로 만들어줄라면,
         return postRepository.findAll().stream()
                 .map(PostResponse::new)

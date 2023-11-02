@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -69,20 +71,20 @@ class PostServiceTest {
     @Test
     @DisplayName("리스트 조회")
     void test3() {
-        // 저장시켜주고
-        postRepository.saveAll(List.of(Post.builder()
-                .title("foo1")
-                .content("bar1")
-                .build(),
-                 Post.builder()
-                .title("foo2")
-                .content("bar2")
-                .build()
-                ));
+        // given: 게시글 30개 저장하기
+        List<Post> requestPosts = IntStream.range(0,30)
+                .mapToObj(i -> Post.builder()
+                        .title("jess log name - " + i)
+                        .content("제주도 애월 맛집 - " + i)
+                        .build())
+                        .collect(Collectors.toList());
+        postRepository.saveAll(requestPosts);
 
-        List<PostResponse> posts = postService.getList();
+        // when
+        List<PostResponse> posts = postService.getList(1);
 
-        assertEquals(2L, posts.size());
+        // then
+        assertEquals(30, posts.size());
     }
 
 }
