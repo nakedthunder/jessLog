@@ -56,6 +56,10 @@ public class PostController {
         return postService.get(postId);
      }
 
+    /**
+     * /posts -> 글 여러 -> 페이징 처리
+     * 페이지를 누를때마다 페이지 번호가 넘어가게 한다.
+     */
      @GetMapping("/posts")
     public List<PostResponse> getList() {
          return postService.getList(1);

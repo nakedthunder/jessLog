@@ -6,6 +6,8 @@ import com.jesslog.request.PostCreate;
 import com.jesslog.response.PostResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,8 +43,10 @@ public class PostService {
     }
 
     public List<PostResponse> getList(int page) {
+        //  넘어온 페에지 1개의 5개 내용
+        Pageable pageable = PageRequest.of(page, 5);
         // PostResponse로 만들어줄라면,
-        return postRepository.findAll().stream()
+        return postRepository.findAll(pageable).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
     }

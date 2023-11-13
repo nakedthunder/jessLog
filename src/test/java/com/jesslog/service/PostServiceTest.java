@@ -69,13 +69,13 @@ class PostServiceTest {
     }
 
     @Test
-    @DisplayName("리스트 조회")
+    @DisplayName("글 1페이지 조회")
     void test3() {
-        // given: 게시글 30개 저장하기
-        List<Post> requestPosts = IntStream.range(0,30)
-                .mapToObj(i -> Post.builder()
-                        .title("jess log name - " + i)
-                        .content("제주도 애월 맛집 - " + i)
+        // given: 게시글 30개 저장하기 , 스트림 API는 쓰기
+        List<Post> requestPosts = IntStream.range(1,31)
+                .mapToObj(i -> Post.builder() // requestEntity 로 저장
+                        .title("jess log 제목 " + i)
+                        .content("제주도 애월 맛집 " + i)
                         .build())
                         .collect(Collectors.toList());
         postRepository.saveAll(requestPosts);
